@@ -17,13 +17,14 @@ if (fs.existsSync(keyFile)) {
     var key = fs.readFileSync(keyFile, 'utf8');
     key = key.replace(/\s/g, "");
     if (!!key) {
-        var before = "value=\"YOUR_BING_SPEECH_API_KEY\"";
-        var after = " disabled value=\"Using token-based auth mechanism.\"";
+        var before = "YOUR_BING_SPEECH_API_KEY";
+        var after = key;
         sample = sample.replace(before, after);
-        sample = sample.replace('var useTokenAuth = false;', 'var useTokenAuth = true;');
+        //sample = sample.replace('var useTokenAuth = false;', 'var useTokenAuth = true;');
     }
+} else {
+    console.log("Please provide an API key in speech.key");
 }
-
 
 var port = 8765;
 var server = http.createServer(function(request, response){
